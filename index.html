@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trái Tim Đặc Biệt</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #f06, #9f6);
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .heart {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            background: #f06;
+            transform: rotate(45deg);
+            box-shadow: 0 0 40px rgba(255, 0, 102, 0.8);
+            animation: beat 1.2s ease-in-out infinite alternate;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: '';
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: #f06;
+            border-radius: 50%;
+        }
+
+        .heart::before {
+            top: -75px;
+            left: 0;
+        }
+
+        .heart::after {
+            top: 0;
+            left: -75px;
+        }
+
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.8);
+            animation: float 2s linear infinite;
+        }
+
+        @keyframes beat {
+            0% {
+                transform: rotate(45deg) scale(1);
+            }
+            25% {
+                transform: rotate(45deg) scale(1.1);
+            }
+            40% {
+                transform: rotate(45deg) scale(1);
+            }
+            60% {
+                transform: rotate(45deg) scale(1.2);
+            }
+            100% {
+                transform: rotate(45deg) scale(1);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(20px);
+                opacity: 0;
+            }
+        }
+
+        .glow {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,0,102,0.8) 0%, rgba(255,0,102,0) 70%);
+            border-radius: 50%;
+            z-index: -2;
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            0% {
+                opacity: 0.5;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0.8;
+                transform: scale(1.2);
+            }
+        }
+        
+        .message {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            color: white;
+            font-family: 'Arial', sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 0 0 10px #f06, 0 0 20px #f06, 0 0 30px #f06;
+            z-index: 10;
+            bottom: -80px;
+            animation: colorChange 2s infinite alternate;
+        }
+        
+        @keyframes colorChange {
+            0% {
+                color: white;
+                transform: scale(1);
+            }
+            50% {
+                color: #ffccdd;
+            }
+            100% {
+                color: white;
+                transform: scale(1.1);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heart"></div>
+        <div class="glow"></div>
+        <div class="particles" id="particles"></div>
+        <div class="message">Yêu Thuý Nga nhất <3</div>
+    </div>
+
+    <script>
+        // Tạo các hạt nhỏ xung quanh trái tim
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 20;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            // Kích thước ngẫu nhiên
+            const size = Math.random() * 8 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            // Vị trí ngẫu nhiên
+            const posX = Math.random() * 300;
+            const posY = Math.random() * 300;
+            particle.style.left = `${posX}px`;
+            particle.style.top = `${posY}px`;
+            
+            // Thời gian và độ trễ ngẫu nhiên cho animation
+            const duration = Math.random() * 3 + 1;
+            const delay = Math.random() * 2;
+            particle.style.animationDuration = `${duration}s`;
+            particle.style.animationDelay = `${delay}s`;
+            
+            particlesContainer.appendChild(particle);
+        }
+    </script>
+</body>
+</html>
